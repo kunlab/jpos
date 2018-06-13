@@ -1,2 +1,2 @@
 # jpos
-paylab pages
+jpos pages
