@@ -1,6 +1,7 @@
 package com.kunlab.jpos.security.jceadapter;
 
 import org.jpos.iso.ISOUtil;
+import org.jpos.security.CipherMode;
 import org.jpos.security.SMAdapter;
 import org.jpos.security.jceadapter.JCEHandlerException;
 import org.junit.Before;
@@ -56,8 +57,7 @@ public class JCEHandlerTest {
         System.out.println("---- clearKey: " + ISOUtil.byte2hex(clearKey.getEncoded()));
     }
 
-
-    protected Key formDESKey(short keyLength, byte[] clearKeyBytes) throws JCEHandlerException {
+    private Key formDESKey(short keyLength, byte[] clearKeyBytes) throws JCEHandlerException {
         Key key = null;
         switch (keyLength) {
             case SMAdapter.LENGTH_DES: {
@@ -78,7 +78,7 @@ public class JCEHandlerTest {
         return key;
     }
 
-    int getBytesLength(short keyLength) throws JCEHandlerException {
+    private int getBytesLength(short keyLength) throws JCEHandlerException {
         int bytesLength = 0;
         switch (keyLength) {
             case SMAdapter.LENGTH_DES:

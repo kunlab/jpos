@@ -8,10 +8,13 @@ import org.jpos.security.jceadapter.JCEHandlerException;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
+import javax.crypto.Mac;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.*;
 import java.security.spec.AlgorithmParameterSpec;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author likun
@@ -19,8 +22,10 @@ import java.security.spec.AlgorithmParameterSpec;
 public class JCEHandler {
     static final String ALG_DES = "DES";
     static final String ALG_TRIPLE_DES = "DESede";
-
+    static final String DES_MODE_ECB = "ECB";
+    static final String DES_MODE_CBC = "CBC";
     static final String DES_NO_PADDING = "NoPadding";
+    static final Map<MacEngineKey, Mac> macEngines = new ConcurrentHashMap();
 
     /**
      * The JCE provider
@@ -307,5 +312,105 @@ public class JCEHandler {
                 throw new JCEHandlerException("Unsupported key length: " + keyLength + " bits");
         }
         return bytesLength;
+    }
+
+    /**
+     * Helper method used for create or retrieve MAC algorithm from cache
+     *
+     * @param engine
+     *            object identyifing MAC algorithm
+     * @return Initialized MAC algotithm
+     * @throws org.jpos.security.jceadapter.JCEHandlerException
+     */
+    Mac assignMACEngine(MacEngineKey engine) throws JCEHandlerException {
+        if (macEngines.containsKey(engine)) {
+            return macEngines.get(engine);
+        }
+        // Initalize new MAC engine and store them in macEngines cache
+        Mac mac = null;
+        try {
+            mac = Mac.getInstance(engine.getMacAlgorithm(), provider);
+            mac.init(engine.getMacKey());
+        } catch (NoSuchAlgorithmException e) {
+            throw new JCEHandlerException(e);
+        } catch (InvalidKeyException e) {
+            throw new JCEHandlerException(e);
+        }
+        macEngines.put(engine, mac);
+        return mac;
+    }
+
+    /**
+     * Generates MAC (Message Message Authentication Code) for some data.
+     *
+     * @param data
+     *            the data to be MACed
+     * @param kd
+     *            the key used for MACing
+     * @param macAlgorithm
+     *            MAC algorithm name suitable for {@link Mac#getInstance}
+     * @return the MAC
+     * @throws org.jpos.security.jceadapter.JCEHandlerException
+     */
+    public byte[] generateMAC(byte[] data, Key kd, String macAlgorithm) throws JCEHandlerException {
+        Mac mac = assignMACEngine(new MacEngineKey(macAlgorithm, kd));
+        synchronized (mac) {
+            mac.reset();
+            return mac.doFinal(data);
+        }
+    }
+
+    /**
+     * Class used for indexing MAC algorithms in cache
+     */
+    protected static class MacEngineKey {
+        private final String macAlgorithm;
+        private final Key macKey;
+
+        protected MacEngineKey(String macAlgorithm, Key macKey) {
+            this.macAlgorithm = macAlgorithm;
+            this.macKey = macKey;
+        }
+
+        public String getMacAlgorithm() {
+            return macAlgorithm;
+        }
+
+        public Key getMacKey() {
+            return macKey;
+        }
+
+        @Override
+        public int hashCode() {
+            final int prime = 31;
+            int result = 1;
+            result = prime * result + (macAlgorithm == null ? 0 : macAlgorithm.hashCode());
+            // Note: class Key does not redefine hashCode - therefore hash on Algorithm only or breaks java equals/hashCode contract
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (obj == null) {
+                return false;
+            }
+            if (getClass() != obj.getClass()) {
+                return false;
+            }
+            MacEngineKey other = (MacEngineKey) obj;
+            if (macAlgorithm == null) {
+                if (other.macAlgorithm != null)
+                    return false;
+            } else if (!macAlgorithm.equals(other.macAlgorithm)) {
+                return false;
+            } else if (macKey != other.macKey) {
+                // Note: class Key does not redefine equals or HashCode - therefore instance equality is all we can do
+                return false;
+            }
+            return true;
+        }
     }
 }
