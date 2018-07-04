@@ -22,6 +22,14 @@ public class JCESecurityModuleTest {
         jceSecurityModule = new JCESecurityModule("src/test/resources/lmk");
     }
 
+    //明文转本地主密钥加密的密文
+    @Test
+    public void importClearKeyImpl() throws Exception {
+        SecureDESKey keyUnderLmk = jceSecurityModule.importKeyImpl(SMAdapter.LENGTH_DES3_2KEY, SMAdapter.TYPE_TMK, testKey, false);
+        System.out.println(ISOUtil.byte2hex(keyUnderLmk.getKeyCheckValue()).toUpperCase());
+    }
+
+    //被KEK加密的密文转本地主密钥加密的密文
     @Test
     public void importKeyImplByHexKEK() throws Exception {
         byte[] testKeyUnderTestKEK = ISOUtil.hex2byte("0DFE1348DABDF124F0810AED8B6A9296");
@@ -29,6 +37,16 @@ public class JCESecurityModuleTest {
         System.out.println("check value: " + ISOUtil.byte2hex(keyUnderLmk.getKeyCheckValue()).toUpperCase());
     }
 
+
+    //将本地主密钥加密的密文转明文
+    @Test
+    public void exportClearKeyImpl() throws Exception {
+        SecureDESKey keyUnderLmk = jceSecurityModule.importKeyImpl(SMAdapter.LENGTH_DES3_2KEY, SMAdapter.TYPE_TMK, testKey, false);
+        byte[] clearKey = jceSecurityModule.exportClearKeyImpl(keyUnderLmk.getKeyLength(), keyUnderLmk.getKeyType(), ISOUtil.byte2hex(keyUnderLmk.getKeyBytes()), ISOUtil.byte2hex(keyUnderLmk.getKeyCheckValue()));
+        System.out.println(ISOUtil.byte2hex(clearKey));
+    }
+
+    //将本地主密钥加密的密文转KEK加密的密文
     @Test
     public void exportKeyImplByHexKEK() throws Exception {
         // testKeyUnderTestKEK是testKey被testKEK加密生成

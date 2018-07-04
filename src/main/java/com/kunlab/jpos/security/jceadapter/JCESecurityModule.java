@@ -164,6 +164,24 @@ public class JCESecurityModule extends BaseSMAdapter{
     }
 
     /**
+     * Imports a clear key to protection under the security module.
+     *
+     * @param keyLength bit length of the key to be imported (LENGTH_DES, LENGTH_DES3_2KEY...etc)
+     * @param keyType type of the key to be imported (TYPE_ZMK, TYPE_TMK...etc)
+     * @param clearKey clearKey
+     * @param checkParity if true, the key is not imported unless it has adjusted parity
+     * @return imported key secured by the security module
+     * @throws SMException if the parity of the imported key is not adjusted AND checkParity = true
+     */
+    public SecureDESKey importKeyImpl(short keyLength, String keyType, byte[] clearKey, boolean checkParity) throws SMException {
+        if (checkParity && !Util.isDESParityAdjusted(clearKey)) {
+            throw new JCEHandlerException("Parity not adjusted");
+        }
+        Key clearDESKey = jceHandler.formDESKey(keyLength, clearKey);
+        return encryptToLMK(keyLength, keyType, clearDESKey);
+    }
+
+    /**
      * Imports a key from encryption under a KEK (Key-Encrypting Key)
      * to protection under the security module.
      *
@@ -192,6 +210,36 @@ public class JCESecurityModule extends BaseSMAdapter{
         // Encrypt key under kek
         return jceHandler.encryptDESKey(key.getKeyLength(), clearKey, decryptFromLMK(kek));
     }
+
+    /**
+     * Exports clear key
+     *
+     * @param keyLength bit length of the key to be imported (LENGTH_DES, LENGTH_DES3_2KEY...etc)
+     * @param keyType type of the key to be imported (TYPE_ZMK, TYPE_TMK...etc)
+     * @param key DES Key in the secure proprietary format of your security module
+     * @param checkValue
+     * @return the exported clear key
+     * @throws SMException
+     */
+    public byte[] exportClearKeyImpl(short keyLength, String keyType, String key, String checkValue) throws SMException {
+        SecureDESKey secureDESKey = new SecureDESKey(keyLength, keyType, ISOUtil.hex2byte(key), ISOUtil.hex2byte(checkValue));
+        return this.exportClearKeyImpl(secureDESKey);
+    }
+
+
+    /**
+     * Exports clear key
+     *
+     * @param key the secure key to be exported
+     * @return the exported clear key
+     * @throws SMException
+     */
+    public byte[] exportClearKeyImpl(SecureDESKey key) throws SMException {
+        // get key in clear
+        Key clearKey = decryptFromLMK(key);
+        return ISOUtil.trim(clearKey.getEncoded(), key.getKeyLength()/8);
+    }
+
 
     /**
      * Exports secure key to encryption under a KEK (Key-Encrypting Key).
