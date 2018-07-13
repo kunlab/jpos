@@ -6,6 +6,11 @@ import org.jpos.security.SecureDESKey;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.crypto.Mac;
+import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  * @author likun
@@ -16,6 +21,7 @@ public class JCESecurityModuleTest {
 
     private static final byte[] testKEK = ISOUtil.hex2byte("10101010101010101010101010101010");  //明文
     private static final byte[] testKey = ISOUtil.hex2byte("A12B3C4DE25FADFA23FADFA1243FAFD2");  //明文
+    private static final byte[] testMAK = ISOUtil.hex2byte("A12B3C4DE25FADFA");                  //明文
 
     @Before
     public void setUp() throws Exception {
@@ -35,6 +41,7 @@ public class JCESecurityModuleTest {
         byte[] testKeyUnderTestKEK = ISOUtil.hex2byte("0DFE1348DABDF124F0810AED8B6A9296");
         SecureDESKey keyUnderLmk = jceSecurityModule.importKeyImpl(SMAdapter.LENGTH_DES3_2KEY, SMAdapter.TYPE_TMK, testKeyUnderTestKEK, testKEK, false);
         System.out.println("check value: " + ISOUtil.byte2hex(keyUnderLmk.getKeyCheckValue()).toUpperCase());
+
     }
 
 
@@ -56,4 +63,21 @@ public class JCESecurityModuleTest {
         byte[] keyUnderTestKEK = jceSecurityModule.exportKeyImpl(keyUnderLmk, testKEK, SMAdapter.LENGTH_DES3_2KEY);
         System.out.println(ISOUtil.byte2hex(keyUnderTestKEK));
     }
+
+    @Test
+    public void generateECB_MACImpl() throws Exception {
+        SecureDESKey keyUnderLmk = jceSecurityModule.importKeyImpl(SMAdapter.LENGTH_DES, SMAdapter.TYPE_TAK, testMAK, false);
+        byte[] data = ISOUtil.hex2byte("0000000000000000");
+        byte[] mac = jceSecurityModule.generateECB_MACImpl(data, keyUnderLmk);
+    }
+
+
+    public static void main(String args[]) {
+        try {
+            Mac.getInstance("ECB");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

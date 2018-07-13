@@ -14,6 +14,7 @@ import org.jpos.util.SimpleMsg;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
+import javax.print.attribute.standard.MediaSize;
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.security.*;
@@ -1221,6 +1222,46 @@ public class JCESecurityModule extends BaseSMAdapter{
             throw  e instanceof SMException ? (SMException)e : new SMException(e);
         }
     }
+
+    /**
+     * Generates ECB-MAC for some data.
+     *
+     * @param data the data to be MACed
+     * @param kd the key used for MACing
+     * @return generated ECB-MAC bytes
+     * @throws SMException
+     */
+    public byte[] generateECB_MACImpl (byte[] data, SecureDESKey kd) throws SMException {
+        if(data.length % 8 != 0) {
+            //Padding with 0x00 bytes
+            byte[] d = new byte[data.length - data.length%8 + 8];
+            System.arraycopy(data, 0, d, 0, data.length);
+            data = d;
+        }
+
+        //MAC_ECB
+        byte[] y_i = ISOUtil.hex2byte("0000000000000000");
+        byte[] yi = new byte[8];
+        for(int i = 0; i<data.length; i+=8) {
+            System.arraycopy(data,i,yi,0,yi.length);
+            y_i = ISOUtil.xor(yi, y_i);
+        }
+
+        byte[] resultBlock = ISOUtil.hexString(y_i).getBytes();
+        //First Des
+        System.arraycopy(resultBlock, 0, yi, 0, yi.length);
+        byte[] block = jceHandler.encryptData(yi, decryptFromLMK(kd));
+
+        //Second Des
+        System.arraycopy(resultBlock, 8,yi,0,yi.length);
+        yi = ISOUtil.xor(block, yi);
+        block = jceHandler.encryptData(yi, decryptFromLMK(kd));
+        System.out.println("------------" + ISOUtil.hexString(block));
+        byte[] result = ISOUtil.hexString(block).getBytes();
+        System.arraycopy(result, 0, yi, 0, yi.length);
+        return yi;
+    }
+
 
     private byte[] generateMACImpl (byte[] data, SecureDESKey kd,
                                     String macAlgorithm, LogEvent evt) throws SMException {
