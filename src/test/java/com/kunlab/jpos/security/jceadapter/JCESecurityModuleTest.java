@@ -72,7 +72,6 @@ public class JCESecurityModuleTest {
         System.out.println("----- hexMac: " + ISOUtil.hexString(mac));
     }
 
-
     public static void main(String args[]) {
         try {
             Mac.getInstance("ECB");

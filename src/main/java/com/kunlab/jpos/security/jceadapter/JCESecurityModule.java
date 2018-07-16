@@ -14,7 +14,6 @@ import org.jpos.util.SimpleMsg;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
-import javax.print.attribute.standard.MediaSize;
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.security.*;
@@ -1251,12 +1250,11 @@ public class JCESecurityModule extends BaseSMAdapter{
         //First Des
         System.arraycopy(resultBlock, 0, yi, 0, yi.length);
         byte[] block = jceHandler.encryptData(yi, decryptFromLMK(kd));
-
         //Second Des
         System.arraycopy(resultBlock, 8,yi,0,yi.length);
         yi = ISOUtil.xor(block, yi);
         block = jceHandler.encryptData(yi, decryptFromLMK(kd));
-        System.out.println("------------" + ISOUtil.hexString(block));
+
         byte[] result = ISOUtil.hexString(block).getBytes();
         System.arraycopy(result, 0, yi, 0, yi.length);
         return yi;
