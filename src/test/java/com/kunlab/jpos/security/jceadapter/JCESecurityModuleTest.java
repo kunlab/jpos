@@ -69,6 +69,7 @@ public class JCESecurityModuleTest {
         SecureDESKey keyUnderLmk = jceSecurityModule.importKeyImpl(SMAdapter.LENGTH_DES, SMAdapter.TYPE_TAK, testMAK, false);
         byte[] data = ISOUtil.hex2byte("0000000000000000");
         byte[] mac = jceSecurityModule.generateECB_MACImpl(data, keyUnderLmk);
+        System.out.println("----- hexMac: " + ISOUtil.hexString(mac));
     }
 
 
