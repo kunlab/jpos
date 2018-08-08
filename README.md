@@ -1,5 +1,9 @@
 # jpos
 
+## env
+JDK 1.8+
+
+
 ## gradle配置
 
 repositories {
