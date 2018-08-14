@@ -15,6 +15,7 @@ import org.jpos.util.SimpleMsg;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import java.io.*;
+import java.net.URISyntaxException;
 import java.nio.ByteBuffer;
 import java.security.*;
 import java.util.*;
@@ -1826,12 +1827,18 @@ public class JCESecurityModule extends BaseSMAdapter{
     /**
      * Initializes the JCE Security Module
      * @param jceProviderClassName
-     * @param lmkFile Local Master Keys File used by JCE Security Module to store the LMKs
+     * @param lmkFile Local Master Keys File used by JCE Security Module to store the LMKs, default from root resources
      * @param lmkRebuild if set to true, the lmkFile gets overwritten with newly generated keys (WARNING: this would render all your previously stored SecureKeys unusable)
      * @throws SMException
      */
     private void init (String jceProviderClassName, String lmkFile, boolean lmkRebuild) throws SMException {
-        File lmk = lmkFile != null ? new File(lmkFile) : null;
+        File lmk = null;
+        try {
+            lmkFile = this.getClass().getClassLoader().getResource(lmkFile).toURI().getPath();
+            lmk = lmkFile != null ? new File(lmkFile) : null;
+        } catch (URISyntaxException e) {
+            throw new SMException("lmkFile: \"" + lmkFile + "\" does not exist." );
+        }
         if (lmk == null && !lmkRebuild)
             throw new SMException ("null lmkFile - needs rebuild");
         try {
