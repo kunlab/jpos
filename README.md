@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.kunlab:jpos:v0.0.1'
+    implementation 'com.github.kunlab:jpos:0.0.1'
 }
 
 
@@ -27,5 +27,5 @@ dependencies {
 <dependency>
     <groupId>com.github.kunlab</groupId>
     <artifactId>jpos</artifactId>
-    <version>v0.0.1</version>
+    <version>0.0.1</version>
 </dependency>
