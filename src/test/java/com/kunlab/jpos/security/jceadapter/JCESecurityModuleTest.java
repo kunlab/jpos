@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import javax.crypto.Mac;
+import java.net.URISyntaxException;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +26,8 @@ public class JCESecurityModuleTest {
 
     @Before
     public void setUp() throws Exception {
-        jceSecurityModule = new JCESecurityModule("src/test/resources/lmk");
+        jceSecurityModule = new JCESecurityModule("lmk");
+
     }
 
     //明文转本地主密钥加密的密文
@@ -74,8 +76,8 @@ public class JCESecurityModuleTest {
 
     public static void main(String args[]) {
         try {
-            Mac.getInstance("ECB");
-        } catch (NoSuchAlgorithmException e) {
+            System.out.println(JCESecurityModuleTest.class.getClassLoader().getResource("lmk").toURI().getPath());
+        } catch (URISyntaxException e) {
             e.printStackTrace();
         }
     }
