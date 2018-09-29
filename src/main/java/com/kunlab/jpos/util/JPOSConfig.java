@@ -14,7 +14,7 @@ public class JPOSConfig implements ConfigDecorationProvider {
 
     @Override
     public void initialize(File deployDir) throws Exception {
-        InputStream in = JPOSConfig.class.getClassLoader().getResourceAsStream(deployDir.getName() + "/conf.properties");
+        InputStream in = JPOSConfig.class.getClassLoader().getResourceAsStream("conf.properties");
 
         try {
             if(in != null) {
@@ -32,7 +32,7 @@ public class JPOSConfig implements ConfigDecorationProvider {
     }
 
     @Override
-    public String decorateFile(File f) throws Exception {
+    public String decorateFile(File f) {
         String regex = "\\$\\{(.+?)\\}";
         return FileUtils.decorateFile(f, regex, prop);
     }
