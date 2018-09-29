@@ -9,12 +9,12 @@ import java.util.Properties;
 /**
  * @author likun
  */
-public class JposConfig implements ConfigDecorationProvider {
+public class JPOSConfig implements ConfigDecorationProvider {
     private Properties prop;
 
     @Override
     public void initialize(File deployDir) throws Exception {
-        InputStream in = JposConfig.class.getClassLoader().getResourceAsStream(deployDir + "/conf.properties");
+        InputStream in = JPOSConfig.class.getClassLoader().getResourceAsStream(deployDir.getName() + "/conf.properties");
 
         try {
             if(in != null) {
