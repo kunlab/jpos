@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.kunlab:jpos:0.0.1'
+    implementation 'com.github.kunlab:jpos:0.0.2'
 }
 
 
