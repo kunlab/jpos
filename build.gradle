@@ -18,6 +18,12 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
     compile group: 'org.jpos', name: 'jpos', version: '2.1.1'
+
+    compile group: 'org.springframework', name: 'spring-context', version: '4.3.10.RELEASE'
+    compile group: 'org.springframework', name: 'spring-web', version: '4.3.10.RELEASE'
+
+    compile group: 'javax.servlet', name: 'servlet-api', version: '2.5'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
 }
 
 
