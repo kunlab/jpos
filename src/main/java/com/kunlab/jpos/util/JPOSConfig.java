@@ -14,15 +14,11 @@ public class JPOSConfig implements ConfigDecorationProvider {
 
     @Override
     public void initialize(File deployDir) throws Exception {
-        InputStream in = JPOSConfig.class.getClassLoader().getResourceAsStream("conf.properties");
-
-        try {
-            if(in != null) {
+        try(InputStream in = JPOSConfig.class.getClassLoader().getResourceAsStream("conf.properties")) {
+            if (in != null) {
                 prop = new Properties();
                 prop.load(in);
             }
-        } finally {
-            if(in != null) in.close();
         }
     }
 
