@@ -6,27 +6,19 @@
 
     <log-listener class="org.jpos.util.DailyLogListener">
         <property name="window" value="86400" /> <!-- optional, default one day -->
-        <!--needed-->
-        <property name="prefix" value="${app.log}" />
+        <property name="prefix" value="/logs/q2" />
         <property name="suffix" value=".log"/> <!-- optional -->
-
-        <!--optional the default is "-yyyy-MM-dd" -->
-        <property name="date-format" value="-yyyy-MM-dd-HH"/>
+        <property name="first-rotate-time" value="15:54:00" />
+        <property name="date-format" value="-yyyy-MM-dd-HH"/> <!--optional the default is "-yyyy-MM-dd" -->
+        <property name="maxsize" value="10485760"/> <!-- =10M -->
 
         <!--optional the default is gzip-->
-        <property name="compression-format" value="gzip"/>
+        <!--<property name="compression-format" value="gzip"/>-->
 
         <!--optional the default is .zip for zip, .gz for gzip-->
         <!--
         <property name="compressed-suffix" value=".zip"/>
         -->
-        <!--
-          almost equals to rotate, except 0 or negatives means no limit
-         (which is the default), in case exceeded the file is compressed,
-         successsive copies will be appended .(count) before the suffix
-         unlike rotate older copies have the least numbers
-        -->
-        <!-- <property name="maxsize" value="-1"/> -->
 
         <!--
           this is a low level parameter which determines the size of the
@@ -43,8 +35,6 @@
          parameters plus multiples of window, the defaults are 00:00:00 and today
          and the formats are HH:mm:ss and yyyy-MM-dd respectively
         -->
-        <property name="first-rotate-time" value="23:00:00" />
-
 
     </log-listener>
 </logger>
