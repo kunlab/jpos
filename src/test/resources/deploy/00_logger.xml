@@ -8,7 +8,7 @@
         <property name="window" value="86400" /> <!-- optional, default one day -->
         <property name="prefix" value="/logs/q2" />
         <property name="suffix" value=".log"/> <!-- optional -->
-        <property name="first-rotate-time" value="15:54:00" />
+        <property name="first-rotate-time" value="10:56:00" />
         <property name="date-format" value="-yyyy-MM-dd-HH"/> <!--optional the default is "-yyyy-MM-dd" -->
         <property name="maxsize" value="10485760"/> <!-- =10M -->
 
