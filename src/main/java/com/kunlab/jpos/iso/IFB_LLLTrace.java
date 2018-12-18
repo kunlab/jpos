@@ -34,6 +34,7 @@ public class IFB_LLLTrace extends ISOStringFieldPackager {
         checkLength(len, 999);
     }
 
+
     public void setLength(int len) {
         checkLength(len, 999);
         super.setLength(len);
