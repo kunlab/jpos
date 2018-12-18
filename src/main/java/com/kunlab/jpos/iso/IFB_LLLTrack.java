@@ -8,10 +8,10 @@ import org.jpos.iso.NullPadder;
 /**
  * @author likun
  */
-public class IFB_LLLTrace extends ISOStringFieldPackager {
+public class IFB_LLLTrack extends ISOStringFieldPackager {
 
     /** Used for the GenericPackager. */
-    public IFB_LLLTrace() {
+    public IFB_LLLTrack() {
         super(NullPadder.INSTANCE, HEXInterpreter.RIGHT_PADDED, BcdPrefixer.LLL);
     }
 
@@ -19,14 +19,14 @@ public class IFB_LLLTrace extends ISOStringFieldPackager {
      * @param len - field len
      * @param description symbolic descrption
      */
-    public IFB_LLLTrace(int len, String description, boolean isLeftPadded) {
+    public IFB_LLLTrack(int len, String description, boolean isLeftPadded) {
         super(len, description, NullPadder.INSTANCE,
                 isLeftPadded ? HEXInterpreter.LEFT_PADDED : HEXInterpreter.RIGHT_PADDED,
                 BcdPrefixer.LLL);
         checkLength(len, 999);
     }
 
-    public IFB_LLLTrace(int len, String description, boolean isLeftPadded, boolean fPadded) {
+    public IFB_LLLTrack(int len, String description, boolean isLeftPadded, boolean fPadded) {
         super(len, description, NullPadder.INSTANCE,
                 isLeftPadded ? HEXInterpreter.LEFT_PADDED :
                         fPadded ? HEXInterpreter.RIGHT_PADDED_F : HEXInterpreter.RIGHT_PADDED,
