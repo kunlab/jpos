@@ -10,6 +10,7 @@ import org.jpos.iso.NullPadder;
  */
 public class IFB_LLLTrace extends ISOStringFieldPackager {
 
+    /** Used for the GenericPackager. */
     public IFB_LLLTrace() {
         super(NullPadder.INSTANCE, HEXInterpreter.RIGHT_PADDED, BcdPrefixer.LLL);
     }
