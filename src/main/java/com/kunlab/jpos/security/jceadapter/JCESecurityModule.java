@@ -2083,6 +2083,10 @@ public class JCESecurityModule extends BaseSMAdapter{
 
     private JCEHandler jceHandler;
 
+    public JCEHandler getJceHandler() {
+        return jceHandler;
+    }
+
     //--------------------------------------------------------------------------------------------------
     // DUKPT
     //--------------------------------------------------------------------------------------------------
