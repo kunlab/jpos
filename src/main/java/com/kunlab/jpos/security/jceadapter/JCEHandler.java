@@ -242,7 +242,7 @@ public class JCEHandler {
      * @return clear key
      * @throws JCEHandlerException
      */
-    protected Key formDESKey(short keyLength, byte[] clearKeyBytes) throws JCEHandlerException {
+    public Key formDESKey(short keyLength, byte[] clearKeyBytes) throws JCEHandlerException {
         Key key = null;
         switch (keyLength) {
             case SMAdapter.LENGTH_DES: {
