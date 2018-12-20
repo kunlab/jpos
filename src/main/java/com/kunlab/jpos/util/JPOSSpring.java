@@ -23,13 +23,12 @@ public class JPOSSpring extends QBeanSupport {
         log.info("loading spring application: " + cfg_spring);
         if(StringUtils.isBlank(cfg_spring))
             throw new ConfigurationException("spring cfg must be not null!");
-        Spring spring = Spring.getInstance(cfg_spring);
-        NameRegistrar.register(getName(), spring);
     }
 
     @Override
     public void startService(){
-
+        Spring spring = Spring.getInstance(cfg.get(CFG_SERVER_SPRING));
+        NameRegistrar.register(getName(), spring);
     }
 
     @Override
