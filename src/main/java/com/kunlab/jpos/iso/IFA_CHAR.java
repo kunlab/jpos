@@ -9,11 +9,11 @@ import org.jpos.iso.*;
  */
 public class IFA_CHAR extends ISOStringFieldPackager {
     /** Used for the GenericPackager. */
-    public IFA_CHAR() { super(RightTPadder.SPACE_PADDER, (Interpreter) AsciiInterpreter.CHARSET_GBK, NullPrefixer.INSTANCE); }
+    public IFA_CHAR() { super(RightTPadder.SPACE_PADDER, AsciiInterpreter.CHARSET_GBK, NullPrefixer.INSTANCE); }
 
 
     public IFA_CHAR(int len, String description) {
-        super(len, description, RightTPadder.SPACE_PADDER, (Interpreter) AsciiInterpreter.CHARSET_GBK, NullPrefixer.INSTANCE);
+        super(len, description, RightTPadder.SPACE_PADDER,  AsciiInterpreter.CHARSET_GBK, NullPrefixer.INSTANCE);
     }
 
     @Override
