@@ -1232,6 +1232,37 @@ public class JCESecurityModule extends BaseSMAdapter{
      * @throws SMException
      */
     public byte[] generateECB_MACImpl (byte[] data, SecureDESKey kd) throws SMException {
+        Key key = decryptFromLMK(kd);
+
+        return generateECB_MACImpl(data, key);
+    }
+
+    /**
+     * Generates ECB-MAC for some data.
+     *
+     * @param data the data to be MACed
+     * @param clearKeyBytes the clean key used for MACing
+     * @param keyLength the clean key length
+     * @return generated ECB-MAC bytes
+     * @throws SMException
+     */
+    public byte[] generateECB_MACImpl (byte[] data, byte[] clearKeyBytes, short keyLength) throws SMException {
+        if (!Util.isDESParityAdjusted(clearKeyBytes))
+            throw new JCEHandlerException("Parity not adjusted");
+
+        Key clearKey = jceHandler.formDESKey(keyLength, clearKeyBytes);
+        return this.generateECB_MACImpl(data, clearKey);
+    }
+
+    /**
+     * Generates ECB-MAC for some data.
+     *
+     * @param data the data to be MACed
+     * @param key the clean key used for MACing
+     * @return generated ECB-MAC bytes
+     * @throws SMException
+     */
+    protected byte[] generateECB_MACImpl(byte[] data, Key key) throws SMException {
         if(data.length % 8 != 0) {
             //Padding with 0x00 bytes
             byte[] d = new byte[data.length - data.length%8 + 8];
@@ -1250,11 +1281,11 @@ public class JCESecurityModule extends BaseSMAdapter{
         byte[] resultBlock = ISOUtil.hexString(y_i).getBytes();
         //First Des
         System.arraycopy(resultBlock, 0, yi, 0, yi.length);
-        byte[] block = jceHandler.encryptData(yi, decryptFromLMK(kd));
+        byte[] block = jceHandler.encryptData(yi, key);
         //Second Des
         System.arraycopy(resultBlock, 8,yi,0,yi.length);
         yi = ISOUtil.xor(block, yi);
-        block = jceHandler.encryptData(yi, decryptFromLMK(kd));
+        block = jceHandler.encryptData(yi, key);
 
         byte[] result = ISOUtil.hexString(block).getBytes();
         System.arraycopy(result, 0, yi, 0, yi.length);
