@@ -1234,7 +1234,7 @@ public class JCESecurityModule extends BaseSMAdapter{
     public byte[] generateECB_MACImpl (byte[] data, SecureDESKey kd) throws SMException {
         Key key = decryptFromLMK(kd);
 
-        return generateECB_MACImpl(data, key);
+        return this.generateECB_MACImpl(data, key);
     }
 
     /**
