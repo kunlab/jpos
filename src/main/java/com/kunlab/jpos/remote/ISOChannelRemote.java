@@ -35,14 +35,13 @@ public class ISOChannelRemote extends BaseRemoteImpl<ISOMsg, ISOMsg> {
     }
 
     @Override
-    public ISOMsg execute(ISOMsg isoMsg) throws RemoteException {
+    public ISOMsg execute(ISOMsg req) throws RemoteException {
         ISOMsg resp = null;
 
-        long time = preReq(isoMsg);
+        long time = preReq(req);
         logger.info("{}:{} | {}ms", host, port, time);
 
         try {
-            ISOMsg req = (ISOMsg) isoMsg.clone();
             resp = qmux.request(req, timeout);
         } catch (ISOException e) {
             logger.error(e);
