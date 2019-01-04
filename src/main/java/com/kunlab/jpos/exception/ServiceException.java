@@ -19,6 +19,11 @@ public class ServiceException extends BaseException {
         super(message, t);
     }
 
+    public ServiceException(String code, String message) {
+        super(code + ":" + message);
+        this.code = code;
+    }
+
     public ServiceException(String code, String message, Throwable t) {
         super(code + ":" + message, t);
         this.code = code;

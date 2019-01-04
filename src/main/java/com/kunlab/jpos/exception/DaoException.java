@@ -19,6 +19,11 @@ public class DaoException extends BaseException {
         super(message, t);
     }
 
+    public DaoException(String code, String message) {
+        super(code + ":" + message);
+        this.code = code;
+    }
+
     public DaoException(String code, String message, Throwable t) {
         super(code + ":" + message);
         this.code = code;
