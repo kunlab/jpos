@@ -615,6 +615,30 @@ public class JCESecurityModule extends BaseSMAdapter{
     }
 
     /**
+     * Calculate MAC
+     * @param key DES
+     * @param d data to calculate MAC on it
+     * @return 8 byte of mac value
+     */
+    public byte[] calculateCBC_MAC(Key key, byte[] d) throws JCEHandlerException {
+        if (d.length%8 != 0) {
+            //Padding with 0x00 bytes
+            byte[] t = new byte[d.length - d.length%8 + 8];
+            System.arraycopy(d, 0, t, 0, d.length);
+            d = t;
+        }
+        //MAC_CBC alg 3
+        byte[] y_i = ISOUtil.hex2byte("0000000000000000");
+        byte[] yi  = new byte[8];
+        for ( int i=0;i<d.length;i+=8){
+            System.arraycopy(d, i, yi, 0, yi.length);
+            y_i = jceHandler.encryptData(ISOUtil.xor(yi, y_i), key);
+        }
+
+        return y_i;
+    }
+
+    /**
      * Prepare 8-bytes data from PAN and PAN Sequence Number.
      * <p>
      * Used at EMV operations: {@link #verifyARQCImpl ARQC verification},
@@ -1194,13 +1218,16 @@ public class JCESecurityModule extends BaseSMAdapter{
      */
     @Override
     protected byte[] generateCBC_MACImpl (byte[] data, SecureDESKey kd) throws SMException {
-        LogEvent evt = new LogEvent(this, "jce-provider-cbc-mac");
-        try {
-            return generateMACImpl(data,kd,cfg.get("cbc-mac","ISO9797ALG3MACWITHISO7816-4PADDING"),evt);
-        } catch (Exception e) {
-            Logger.log(evt);
-            throw  e instanceof SMException ? (SMException)e : new SMException(e);
-        }
+//        LogEvent evt = new LogEvent(this, "jce-provider-cbc-mac");
+//        try {
+//            return generateMACImpl(data,kd,cfg.get("cbc-mac","ISO9797ALG3MACWITHISO7816-4PADDING"),evt);
+//        } catch (Exception e) {
+//            Logger.log(evt);
+//            throw  e instanceof SMException ? (SMException)e : new SMException(e);
+//        }
+
+        //-------------------------------------------------------------
+        return calculateCBC_MAC(decryptFromLMK(kd), data);
     }
 
     /**
