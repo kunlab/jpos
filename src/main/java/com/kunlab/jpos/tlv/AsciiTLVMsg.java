@@ -8,23 +8,23 @@ import java.io.Serializable;
 /**
  * @author likun
  */
-public class TLVMsg implements Serializable {
+public class AsciiTLVMsg implements Serializable {
 
     private String tag;
     private String value;
     private String charset;
 
 
-    public TLVMsg() {
+    public AsciiTLVMsg() {
         super();
     }
 
-    public TLVMsg(String tag, String value) {
+    public AsciiTLVMsg(String tag, String value) {
         this.tag = tag;
         this.value = value;
     }
 
-    public TLVMsg(String tag, String value, String charset) {
+    public AsciiTLVMsg(String tag, String value, String charset) {
         this.tag = tag;
         this.value = value;
         this.charset = charset;

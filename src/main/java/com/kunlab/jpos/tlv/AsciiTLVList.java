@@ -13,28 +13,28 @@ import java.util.List;
  * 参考TLV规范，T and L 为固定长度
  * @author likun
  */
-public class TLVList implements Serializable {
+public class AsciiTLVList implements Serializable {
 
-    private List<TLVMsg> tags = new ArrayList<>();
+    private List<AsciiTLVMsg> tags = new ArrayList<>();
     private String prefix;
     private String suffix;
 
 
-    public void append(TLVMsg tlvToAppend) {
+    public void append(AsciiTLVMsg tlvToAppend) {
         tags.add(tlvToAppend);
     }
 
     public void append(String tag, String value) {
-        this.tags.add(new TLVMsg(tag, value));
+        append(new AsciiTLVMsg(tag, value));
     }
 
     public void append(String tag, String value, String charset) {
-        tags.add(new TLVMsg(tag, value, charset));
+        append(new AsciiTLVMsg(tag, value, charset));
     }
 
     public void deleteByTag(String tag) {
-        List<TLVMsg> t = new ArrayList<>();
-        for(TLVMsg tlv2 : tags) {
+        List<AsciiTLVMsg> t = new ArrayList<>();
+        for(AsciiTLVMsg tlv2 : tags) {
             if(tlv2.getTag().equals(tag))
                 t.add(tlv2);
         }
@@ -46,12 +46,12 @@ public class TLVList implements Serializable {
         tags.remove(index);
     }
 
-    public List<TLVMsg> getTags() {
+    public List<AsciiTLVMsg> getTags() {
         return tags;
     }
 
-    public TLVMsg find(String tag) {
-        for(TLVMsg tlv : tags) {
+    public AsciiTLVMsg find(String tag) {
+        for(AsciiTLVMsg tlv : tags) {
             if(tlv.getTag().equals(tag))
                 return tlv;
         }
@@ -64,7 +64,7 @@ public class TLVList implements Serializable {
 
         if(StringUtils.isNotBlank(prefix)) sb.append(prefix);
 
-        for(TLVMsg tlv : tags) {
+        for(AsciiTLVMsg tlv : tags) {
             sb.append(tlv.getTLV(length));
         }
 

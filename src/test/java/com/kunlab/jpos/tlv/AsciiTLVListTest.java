@@ -7,11 +7,11 @@ import java.nio.ByteBuffer;
 /**
  * @author likun
  */
-public class TLVListTest {
+public class AsciiTLVListTest {
 
     @Test
     public void pack() throws Exception{
-        TLVList list = new TLVList();
+        AsciiTLVList list = new AsciiTLVList();
         list.append("42", "888888888888888");
 
         System.out.println(list.pack(2));
@@ -19,13 +19,13 @@ public class TLVListTest {
 
     @Test
     public void unpack() throws Exception{
-//        TLVList list = new TLVList();
+//        AsciiTLVList list = new AsciiTLVList();
 //        list.append("42", "商户编号", "UTF-8");
 //        String str = list.pack(2);
 //
-//        TLVList l2 = new TLVList();
+//        AsciiTLVList l2 = new AsciiTLVList();
 //        l2.unpack(str, 0,0,"UTF-8",2, 2);
-//        for(TLVMsg tlv : l2.getTags()) {
+//        for(AsciiTLVMsg tlv : l2.getTags()) {
 //            System.out.println(tlv.getTag());
 //            System.out.println(tlv.getValue());
 //        }
