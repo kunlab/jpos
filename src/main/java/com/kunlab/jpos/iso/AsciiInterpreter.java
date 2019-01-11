@@ -1,8 +1,6 @@
 package com.kunlab.jpos.iso;
 
-import org.jpos.iso.ISOException;
 import org.jpos.iso.Interpreter;
-
 import java.nio.charset.Charset;
 
 /**
@@ -21,12 +19,12 @@ public class AsciiInterpreter implements Interpreter {
     }
 
     @Override
-    public void interpret(String data, byte[] b, int offset) throws ISOException {
+    public void interpret(String data, byte[] b, int offset) {
         System.arraycopy(data.getBytes(charset), 0, b, offset, data.length());
     }
 
     @Override
-    public String uninterpret(byte[] rawData, int offset, int length) throws ISOException {
+    public String uninterpret(byte[] rawData, int offset, int length) {
         byte[] ret = new byte[length];
         System.arraycopy(rawData, offset, ret, 0, length);
         return new String(ret, charset);
