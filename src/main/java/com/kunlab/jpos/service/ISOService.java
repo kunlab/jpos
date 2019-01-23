@@ -6,6 +6,6 @@ import org.jpos.iso.ISOSource;
 /**
  * @author likun
  */
-public interface ISOService extends BaseService<ISOSource, ISOMsg> {
+public interface ISOService extends BaseService<ISOMsg, ISOSource> {
     public void execute(ISOMsg msg, ISOSource source) throws Exception;
 }
