@@ -3,39 +3,39 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!-- 事务 -->
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
+    <!--&lt;!&ndash; 事务 &ndash;&gt;-->
+    <!--<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+        <!--<property name="dataSource" ref="dataSource"/>-->
+    <!--</bean>-->
 
-    <!-- 方法名前缀$ 异常事务回滚 -->
-    <bean id="transactionInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor">
-        <property name="transactionManager" ref="transactionManager"/>
-        <property name="transactionAttributes">
-            <props>
-                <prop key="$*">PROPAGATION_REQUIRED, -ServiceException, -Exception</prop>
-                <prop key="*">PROPAGATION_REQUIRED, readOnly</prop>
-            </props>
-        </property>
-    </bean>
+    <!--&lt;!&ndash; 方法名前缀$ 异常事务回滚 &ndash;&gt;-->
+    <!--<bean id="transactionInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor">-->
+        <!--<property name="transactionManager" ref="transactionManager"/>-->
+        <!--<property name="transactionAttributes">-->
+            <!--<props>-->
+                <!--<prop key="$*">PROPAGATION_REQUIRED, -ServiceException, -Exception</prop>-->
+                <!--<prop key="*">PROPAGATION_REQUIRED, readOnly</prop>-->
+            <!--</props>-->
+        <!--</property>-->
+    <!--</bean>-->
 
-    <!-- bean名后缀Service 控制事务 -->
-    <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
-        <property name="beanNames" value="*TransactionService"/>
-        <property name="interceptorNames">
-            <list>
-                <value>transactionInterceptor</value>
-            </list>
-        </property>
-    </bean>
+    <!--&lt;!&ndash; bean名后缀Service 控制事务 &ndash;&gt;-->
+    <!--<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">-->
+        <!--<property name="beanNames" value="*TransactionService"/>-->
+        <!--<property name="interceptorNames">-->
+            <!--<list>-->
+                <!--<value>transactionInterceptor</value>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
 
 
-    <bean class="org.springframework.transaction.interceptor.TransactionAttributeSourceAdvisor">
-        <property name="transactionInterceptor" ref="transactionInterceptor"/>
-    </bean>
+    <!--<bean class="org.springframework.transaction.interceptor.TransactionAttributeSourceAdvisor">-->
+        <!--<property name="transactionInterceptor" ref="transactionInterceptor"/>-->
+    <!--</bean>-->
 
-    <bean id="baseService" class="com.kunlab.jpos.service.BaseServiceImpl" abstract="true">
-    </bean>
+    <!--<bean id="baseService" class="com.kunlab.jpos.service.BaseServiceImpl" abstract="true">-->
+    <!--</bean>-->
 
 
 

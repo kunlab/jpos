@@ -3,26 +3,26 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
-        <property name="name" value="${database.alias}"/>
-        <property name="driverClassName" value="${database.driver}"/>
-        <property name="url" value="${database.url}"/>
-        <property name="username" value="${database.username}"/>
-        <property name="password" value="${database.password}"/>
-        <property name="initialSize" value="${database.init}"/>
-        <property name="minIdle" value="${database.min}"/>
-        <property name="maxActive" value="${database.max}"/>
-        <property name="maxWait" value="${database.timeout}"/>
-        <property name="timeBetweenEvictionRunsMillis" value="${database.test}"/>
-        <property name="minEvictableIdleTimeMillis" value="${database.live}"/>
-        <property name="filters" value="stat"/>
-        <property name="validationQuery" value="SELECT 'x'"/>
-        <property name="testWhileIdle" value="true"/>
-        <property name="testOnBorrow" value="false"/>
-        <property name="testOnReturn" value="false"/>
-        <property name="removeAbandoned" value="true"/>
-        <property name="removeAbandonedTimeout" value="1800"/>
-        <property name="logAbandoned" value="true"/>
-    </bean>
+    <!--<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">-->
+        <!--<property name="name" value="${database.alias}"/>-->
+        <!--<property name="driverClassName" value="${database.driver}"/>-->
+        <!--<property name="url" value="${database.url}"/>-->
+        <!--<property name="username" value="${database.username}"/>-->
+        <!--<property name="password" value="${database.password}"/>-->
+        <!--<property name="initialSize" value="${database.init}"/>-->
+        <!--<property name="minIdle" value="${database.min}"/>-->
+        <!--<property name="maxActive" value="${database.max}"/>-->
+        <!--<property name="maxWait" value="${database.timeout}"/>-->
+        <!--<property name="timeBetweenEvictionRunsMillis" value="${database.test}"/>-->
+        <!--<property name="minEvictableIdleTimeMillis" value="${database.live}"/>-->
+        <!--<property name="filters" value="stat"/>-->
+        <!--<property name="validationQuery" value="SELECT 'x'"/>-->
+        <!--<property name="testWhileIdle" value="true"/>-->
+        <!--<property name="testOnBorrow" value="false"/>-->
+        <!--<property name="testOnReturn" value="false"/>-->
+        <!--<property name="removeAbandoned" value="true"/>-->
+        <!--<property name="removeAbandonedTimeout" value="1800"/>-->
+        <!--<property name="logAbandoned" value="true"/>-->
+    <!--</bean>-->
 
 </beans>
