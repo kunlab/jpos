@@ -51,6 +51,7 @@ public class RequestListener implements ISORequestListener, Configurable {
             throw new ConfigurationException("no spring instance found, spring name '" + cfg.get(CFG_SPRING) + "'");
     }
 
+
     @Override
     public boolean process(ISOSource source, ISOMsg m) {
         if(useThreadPool)
