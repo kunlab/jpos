@@ -27,7 +27,7 @@ import java.util.concurrent.Executors;
  * @author likun
  */
 public class RequestListener implements ISORequestListener, Configurable {
-    private Logger logger = null;
+    private Logger logger;
     private static final String CFG_SPRING= "spring";
     private static final String CFG_SERVICE = "service";
     private Boolean useThreadPool;
