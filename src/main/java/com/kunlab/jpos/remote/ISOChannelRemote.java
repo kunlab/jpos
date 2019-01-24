@@ -5,6 +5,7 @@ import com.kunlab.jpos.util.enums.ResultEnum;
 import org.jpos.iso.BaseChannel;
 import org.jpos.iso.ISOException;
 import org.jpos.iso.ISOMsg;
+import org.jpos.iso.ISOUtil;
 import org.jpos.q2.iso.QMUX;
 import org.jpos.util.NameRegistrar;
 
@@ -42,6 +43,7 @@ public class ISOChannelRemote extends BaseRemoteImpl<ISOMsg, ISOMsg> {
         logger.info("{}:{} | {}ms", host, port, time);
 
         try {
+            logger.info("remote req(hex): {}", ISOUtil.hexString(req.pack()));
             resp = qmux.request(req, timeout);
         } catch (ISOException e) {
             logger.error(e);
