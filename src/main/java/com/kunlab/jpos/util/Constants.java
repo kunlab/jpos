@@ -48,5 +48,42 @@ public class Constants {
     public static final String POS_072                  = "072";                //PBOC借贷记 IC 卡读入，无 PIN
 
 
+    //-------------------------------------------------------------------------------------------------------
+    public static final String GLOBAL_SESSION			= "global_session";	// 全局SESSION
 
+    public static final String DEFAULT_CHARSET			= "UTF-8";			// 默认字符集
+
+    public static final String FALSE					= "0";              // 假
+    public static final String TRUE						= "1";              // 真
+
+    public static final String SUCCESS					= "success";		// 成功
+    public static final String FAILULRE					= "failure";		// 失败
+
+    public static final String ACTION_SYSTEM			= "/system";		// system action root path
+    public static final String ACTION_SYSTEM_INFO		= "/info.htm";      // system info action
+    public static final String ACTION_SYSTEM_THREAD		= "/thread.htm";    // system thread action
+    public static final String ACTION_SYSTEM_DATABASE	= "/database.htm";	// system database action
+    public static final String ACTION_DEFAULT_VIEW		= "index";    		// default view
+
+    public static final String DEFAULT_CONFIG			= "conf";			// 默认配置文件名
+
+    public static final String OP_SYSTEM				= "SYSTEM";			// 系统操作员
+
+    public static final String RESULT_SUCCESS			= "00000000";		// 响应成功
+
+    public static final String ERROR_SYSTEM				= "1";				// 系统异常
+    public static final String ERROR_DATABASE			= "2";				// 数据库异常
+    public static final String ERROR_NETWORK			= "3";				// 网络异常
+    public static final String ERROR_INSIDE				= "4";				// 内部系统异常
+    public static final String ERROR_OUTSIDE			= "5";				// 外部系统异常
+    public static final String ERROR_PROCESS			= "6";				// 业务逻辑异常
+    public static final String ERROR_CONFIG				= "7";				// 基础配置异常
+    public static final String ERROR_VALIDATE			= "8";				// 数据检查异常
+    public static final String ERROR_OTHER				= "9";				// 其它错误异常
+
+    public static final String DEFAULT_MODULE			= "payment";		// 默认系统标识
+
+    public static final String SYS_CACHE_NAME			= "cache";			// 系统缓存名
+    public static final String SYS_CACHE_KEY_SYS_CODE	= "system.code";	// 系统编码
+    public static final String SYS_CACHE_KEY_HTTP_IP	= "http.ip";		// 来源IP
 }
