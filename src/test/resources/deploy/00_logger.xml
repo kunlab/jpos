@@ -1,40 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<logger name="Q2" class="org.jpos.q2.qbean.LoggerAdaptor">
-    <property name="redirect" value="stdout, stderr" />
-    <log-listener class="org.jpos.util.SimpleLogListener" />
+<logger name="Q2">
+    <!--<property name="redirect" value="stdout, stderr" />-->
 
-    <log-listener class="org.jpos.util.DailyLogListener">
-        <property name="window" value="86400" /> <!-- optional, default one day -->
-        <property name="prefix" value="/logs/q2" />
-        <property name="suffix" value=".log"/> <!-- optional -->
-        <property name="first-rotate-time" value="10:56:00" />
-        <property name="date-format" value="-yyyy-MM-dd-HH"/> <!--optional the default is "-yyyy-MM-dd" -->
-        <property name="maxsize" value="10485760"/> <!-- =10M -->
+    <!--<log-listener class="org.jpos.util.SimpleLogListener" />-->
+    <log-listener class="com.kunlab.jpos.util.Log4jListener" />
 
-        <!--optional the default is gzip-->
-        <!--<property name="compression-format" value="gzip"/>-->
+    <!--<log-listener class="org.jpos.util.DailyLogListener">-->
+        <!--<property name="window" value="86400" /> &lt;!&ndash; optional, default one day &ndash;&gt;-->
+        <!--<property name="prefix" value="/logs/jpos/q2" />-->
+        <!--<property name="suffix" value=".log"/> &lt;!&ndash; optional &ndash;&gt;-->
+        <!--<property name="first-rotate-time" value="10:56:00" />-->
+        <!--<property name="date-format" value="-yyyy-MM-dd-HH"/> &lt;!&ndash;optional the default is "-yyyy-MM-dd" &ndash;&gt;-->
+        <!--<property name="maxsize" value="10485760"/> &lt;!&ndash; =10M &ndash;&gt;-->
 
-        <!--optional the default is .zip for zip, .gz for gzip-->
-        <!--
-        <property name="compressed-suffix" value=".zip"/>
-        -->
+        <!--&lt;!&ndash;optional the default is gzip&ndash;&gt;-->
+        <!--&lt;!&ndash;<property name="compression-format" value="gzip"/>&ndash;&gt;-->
 
-        <!--
-          this is a low level parameter which determines the size of the
-          buffer used to read from the uncompressed file, the default is
-          128*1024 = 128 KB, use bigger values in machines with lot of
-          memory and your logs are big
-        -->
-        <!--
-        <property name="compression-buffer-size" value="131072"/>
-        -->
-        <!--
-         first-rotate-time and first-rotate-date determines the first rotation,
-         succesive rotations will take place at the time determined by this two
-         parameters plus multiples of window, the defaults are 00:00:00 and today
-         and the formats are HH:mm:ss and yyyy-MM-dd respectively
-        -->
+        <!--&lt;!&ndash;optional the default is .zip for zip, .gz for gzip&ndash;&gt;-->
+        <!--&lt;!&ndash;-->
+        <!--<property name="compressed-suffix" value=".zip"/>-->
+        <!--&ndash;&gt;-->
 
-    </log-listener>
+        <!--&lt;!&ndash;-->
+          <!--this is a low level parameter which determines the size of the-->
+          <!--buffer used to read from the uncompressed file, the default is-->
+          <!--128*1024 = 128 KB, use bigger values in machines with lot of-->
+          <!--memory and your logs are big-->
+        <!--&ndash;&gt;-->
+        <!--&lt;!&ndash;-->
+        <!--<property name="compression-buffer-size" value="131072"/>-->
+        <!--&ndash;&gt;-->
+        <!--&lt;!&ndash;-->
+         <!--first-rotate-time and first-rotate-date determines the first rotation,-->
+         <!--succesive rotations will take place at the time determined by this two-->
+         <!--parameters plus multiples of window, the defaults are 00:00:00 and today-->
+         <!--and the formats are HH:mm:ss and yyyy-MM-dd respectively-->
+        <!--&ndash;&gt;-->
+
+    <!--</log-listener>-->
 </logger>
