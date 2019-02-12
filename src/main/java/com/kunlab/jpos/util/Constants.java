@@ -7,7 +7,7 @@ public class Constants {
 
     public static final String INTERNAL_ZPK             = "internal.zpk";
 
-    //消息类型
+    //MSG TYPE
     public static final String MSG_ECHO                 = "echo";                   //回响测试
     public static final String MSG_CHECK_IN             = "check_in";               //签到
     public static final String MSG_SALE                 = "sale";                   //消费

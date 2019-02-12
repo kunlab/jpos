@@ -14,12 +14,14 @@ import org.jpos.util.NameRegistrar;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Q2:
  * <pre>
  *     <request-listener class="com.kunlab.jpos.iso.RequestListener" logger="Q2">
- *         <property name="spring" value="spring实例name" />
+ *         <property name="spring" value="spring instance name" />
  *         <property name="service" value="ISOService..." />
  *     </request-listener>
  * </pre>
@@ -44,11 +46,11 @@ public class RequestListener implements ISORequestListener, Configurable {
         this.cfg = cfg;
         useThreadPool = cfg.getBoolean("useThreadPool", true);
         if(useThreadPool)
-            threadPool = Executors.newCachedThreadPool();
+            threadPool = Executors.newCachedThreadPool(new NamedThreadFactory("requestListener"));
 
         instance = (Spring) NameRegistrar.getIfExists(cfg.get(CFG_SPRING));
         if(instance == null)
-            throw new ConfigurationException("no spring instance found, spring name '" + cfg.get(CFG_SPRING) + "'");
+            throw new ConfigurationException("no spring instance found, cfg the spring instance name: '" + cfg.get(CFG_SPRING) + "'");
     }
 
 
@@ -70,4 +72,36 @@ public class RequestListener implements ISORequestListener, Configurable {
             logger.error(e);
         }
     }
+
+
+    static class NamedThreadFactory implements ThreadFactory {
+        private static final AtomicInteger poolNumber = new AtomicInteger(1);
+        private final ThreadGroup group;
+        private final AtomicInteger threadNumber = new AtomicInteger(1);
+        private final String namePrefix;
+
+        private NamedThreadFactory(String name) {
+            SecurityManager s = System.getSecurityManager();
+            group = (s != null) ? s.getThreadGroup() :
+                    Thread.currentThread().getThreadGroup();
+            namePrefix = "pool-" +
+                    poolNumber.getAndIncrement() +
+                    "-" + name + "-";
+        }
+
+        @Override
+        public Thread newThread(Runnable r) {
+            Thread t = new Thread(group, r,
+                    namePrefix + threadNumber.getAndIncrement(),
+                    0);
+            if (t.isDaemon())
+                t.setDaemon(false);
+            if (t.getPriority() != Thread.NORM_PRIORITY)
+                t.setPriority(Thread.NORM_PRIORITY);
+            return t;
+        }
+    }
+
+
+
 }
