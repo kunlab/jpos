@@ -14,6 +14,5 @@ public class Log4jListenerTest {
         LogEvent ev = new LogEvent("error", "test");
 
         log4jListener.log(ev);
-        System.out.println("------------------------");
     }
 }
