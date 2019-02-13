@@ -1,42 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <logger name="Q2">
-    <!--<property name="redirect" value="stdout, stderr" />-->
 
-    <!--<log-listener class="org.jpos.util.SimpleLogListener" />-->
+    <log-listener class="org.jpos.util.ProtectedLogListener">
+        <property name="protect" value="2 14 35 36 55 62"/>
+        <property name="wipe" value="52"/>
+    </log-listener>
+
     <log-listener class="com.kunlab.jpos.util.Log4jListener" />
 
-    <!--<log-listener class="org.jpos.util.DailyLogListener">-->
-        <!--<property name="window" value="86400" /> &lt;!&ndash; optional, default one day &ndash;&gt;-->
-        <!--<property name="prefix" value="/logs/jpos/q2" />-->
-        <!--<property name="suffix" value=".log"/> &lt;!&ndash; optional &ndash;&gt;-->
-        <!--<property name="first-rotate-time" value="10:56:00" />-->
-        <!--<property name="date-format" value="-yyyy-MM-dd-HH"/> &lt;!&ndash;optional the default is "-yyyy-MM-dd" &ndash;&gt;-->
-        <!--<property name="maxsize" value="10485760"/> &lt;!&ndash; =10M &ndash;&gt;-->
-
-        <!--&lt;!&ndash;optional the default is gzip&ndash;&gt;-->
-        <!--&lt;!&ndash;<property name="compression-format" value="gzip"/>&ndash;&gt;-->
-
-        <!--&lt;!&ndash;optional the default is .zip for zip, .gz for gzip&ndash;&gt;-->
-        <!--&lt;!&ndash;-->
-        <!--<property name="compressed-suffix" value=".zip"/>-->
-        <!--&ndash;&gt;-->
-
-        <!--&lt;!&ndash;-->
-          <!--this is a low level parameter which determines the size of the-->
-          <!--buffer used to read from the uncompressed file, the default is-->
-          <!--128*1024 = 128 KB, use bigger values in machines with lot of-->
-          <!--memory and your logs are big-->
-        <!--&ndash;&gt;-->
-        <!--&lt;!&ndash;-->
-        <!--<property name="compression-buffer-size" value="131072"/>-->
-        <!--&ndash;&gt;-->
-        <!--&lt;!&ndash;-->
-         <!--first-rotate-time and first-rotate-date determines the first rotation,-->
-         <!--succesive rotations will take place at the time determined by this two-->
-         <!--parameters plus multiples of window, the defaults are 00:00:00 and today-->
-         <!--and the formats are HH:mm:ss and yyyy-MM-dd respectively-->
-        <!--&ndash;&gt;-->
-
-    <!--</log-listener>-->
 </logger>

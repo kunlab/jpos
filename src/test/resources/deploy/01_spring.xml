@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spring-init name="jpos-spring" class="com.kunlab.jpos.util.JPOSSpring" logger="Q2">
+    <property name="spring" value="applicationContext-jpos.xml" />
+</spring-init>

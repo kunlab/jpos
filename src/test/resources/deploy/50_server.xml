@@ -9,15 +9,11 @@
              header="6000000000603000320000">
         <property name="packager-config" value="${server.channel.package}"/>
         <property name="expect-keep-alive" value="true"/>
-
-        <filter class="org.jpos.iso.filter.MacroFilter" direction="incoming">
-
-        </filter>
     </channel>
 
-    <!--<request-listener class="com.kunlab.jpos.iso.RequestListener" logger="Q2">-->
-        <!--<property name="spring" value="jpos-spring" />-->
-        <!--<property name="service" value="isoService" />-->
-    <!--</request-listener>-->
+    <request-listener class="com.kunlab.jpos.iso.RequestListener" logger="Q2">
+        <property name="spring" value="jpos-spring" />
+        <property name="service" value="isoService" />
+    </request-listener>
 
 </qserver>
