@@ -42,6 +42,9 @@ public class Log4jListener implements LogListener{
                 case "fatal":
                     logger.fatal(ev);
                     break;
+                default:
+                    logger.info(ev);
+                    break;
             }
         }
         return ev;

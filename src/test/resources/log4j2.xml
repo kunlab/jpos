@@ -10,17 +10,18 @@
                 <TimeBasedTriggeringPolicy/>
                 <SizeBasedTriggeringPolicy size="100 MB"/>
             </Policies>
+            <DefaultRolloverStrategy max="20"/>
         </RollingFile>
-        <Socket name="socket" host="192.168.1.236" port="33333" protocol="UDP">
-            <PatternLayout pattern="q2 %d{yyyy-MM-dd HH:mm:ss.SSS} [%p|%t|%X{tid}|%X{cip}>%X{sip}|%c{1.}] - %m%n"/>
-        </Socket>
+        <!--<Socket name="socket" host="192.168.1.236" port="33333" protocol="UDP">-->
+            <!--<PatternLayout pattern="q2 %d{yyyy-MM-dd HH:mm:ss.SSS} [%p|%t|%X{tid}|%X{cip}>%X{sip}|%c{1.}] - %m%n"/>-->
+        <!--</Socket>-->
     </Appenders>
 
     <Loggers>
         <Root level="info">
-            <AppenderRef ref="console"/>
+            <!--<AppenderRef ref="console"/>-->
             <AppenderRef ref="rollingFile"/>
-            <AppenderRef ref="socket"/>
+            <!--<AppenderRef ref="socket"/>-->
         </Root>
     </Loggers>
 </Configuration>
