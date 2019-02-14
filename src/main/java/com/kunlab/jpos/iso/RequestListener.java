@@ -35,7 +35,10 @@ public class RequestListener implements ISORequestListener, Configurable {
     private Boolean useThreadPool;
     private ExecutorService threadPool;
     private Configuration cfg;
+
     private Spring instance;
+    private ISOService isoService;
+
 
     public RequestListener() {
         logger = LogManager.getLogger(RequestListener.class);
@@ -51,6 +54,8 @@ public class RequestListener implements ISORequestListener, Configurable {
         instance = (Spring) NameRegistrar.getIfExists(cfg.get(CFG_SPRING));
         if(instance == null)
             throw new ConfigurationException("no spring instance found, cfg the spring instance name: '" + cfg.get(CFG_SPRING) + "'");
+
+        isoService = (ISOService) instance.getBean(cfg.get(CFG_SERVICE));
     }
 
 
@@ -65,7 +70,6 @@ public class RequestListener implements ISORequestListener, Configurable {
 
 
     private void service(ISOSource source, ISOMsg m) {
-        ISOService isoService = (ISOService) instance.getBean(cfg.get(CFG_SERVICE));
         try {
             isoService.execute(m, source);
         } catch (Exception e) {

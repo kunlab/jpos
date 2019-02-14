@@ -19,7 +19,7 @@
 
     <Loggers>
         <Root level="info">
-            <!--<AppenderRef ref="console"/>-->
+            <AppenderRef ref="console"/>
             <AppenderRef ref="rollingFile"/>
             <!--<AppenderRef ref="socket"/>-->
         </Root>
