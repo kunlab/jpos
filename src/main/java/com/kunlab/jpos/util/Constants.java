@@ -41,6 +41,9 @@ public class Constants {
     public static final String CTX_BATCH_NO             = "batch_no";
     public static final String CTX_TRACE_NO             = "trace_no";
     public static final String CTX_POS_ENTRY_MODE       = "pos_entry_mode";
+    public static final String CTX_REFERENCE            = "ref_no";
+    public static final String CTX_AUTH_NO              = "auth_no";
+
 
     //签购单信息
     public static final String CTX_SIGNINFO_MID         = "signinfo_mid";       //商户编号
