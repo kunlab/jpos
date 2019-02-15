@@ -29,7 +29,7 @@ public class Constants {
 
 
 
-    //Context信息
+    //Context
     public static final String CTX_TIMESTAMP            = "timestamp";
     public static final String CTX_SOURCE               = "source";
     public static final String CTX_REQUEST              = "request";
@@ -38,6 +38,10 @@ public class Constants {
     public static final String CTX_MID                  = "mid";
     public static final String CTX_TID                  = "tid";
     public static final String CTX_MSG_TYPE             = "msg_type";
+    public static final String CTX_BATCH_NO             = "batch_no";
+    public static final String CTX_TRACE_NO             = "trace_no";
+    public static final String CTX_POS_ENTRY_MODE       = "pos_entry_mode";
+
     //签购单信息
     public static final String CTX_SIGNINFO_MID         = "signinfo_mid";       //商户编号
     public static final String CTX_SIGNINFO_TID         = "signinfo_tid";       //终端编号
