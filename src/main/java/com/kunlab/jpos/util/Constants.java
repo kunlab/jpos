@@ -9,12 +9,25 @@ public class Constants {
 
     //MSG TYPE
     public static final String MSG_ECHO                 = "echo";                   //回响测试
-    public static final String MSG_CHECK_IN             = "check_in";               //签到
+
+    public static final String MSG_CHECK_IN_DES         = "check_in_des";           //签到(单倍长)
+    public static final String MSG_CHECK_IN_TDES        = "check_in_tdes";          //签到(双倍长)
+    public static final String MSG_CHECK_IN_TDES_T      = "check_in_tdes_t";        //签到(双倍长含磁道密钥)
+
     public static final String MSG_SALE                 = "sale";                   //消费
     public static final String MSG_SALE_REVERSAL        = "sale_reversal";          //消费冲正
     public static final String MSG_SALE_CANCEL          = "sale_cancel";            //消费撤销
     public static final String MSG_SALE_CANCEL_REVERSAL = "sale_cancel_reversal";   //消费撤销冲正
     public static final String MSG_BALANCE              = "balance";                //余额查询
+
+    public static final String PARAM_IC_PUBLIC          = "param_ic_pub";           //IC卡公钥下载
+    public static final String PARAM_IC_PUBLIC_FINISH   = "param_ic_pub_f";         //IC卡公钥下载结束
+    public static final String PARAM_IC                 = "param_ic";               //IC卡参数下载
+    public static final String PARAM_IC_FINISH          = "param_ic_f";             //IC卡参数下载结束
+    public static final String PARAM_NON                = "param_non";              //非接业务控制参数下载
+    public static final String PARAM_NON_FINISH         = "param_non_f";            //非接业务控制参数下载结束
+
+
 
     //Context信息
     public static final String CTX_TIMESTAMP            = "timestamp";
