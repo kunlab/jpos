@@ -32,15 +32,12 @@ import java.util.Map;
  */
 public class DataCacheObject {
 
-    private Logger logger = null;
+    private Logger logger;
 
     private List<Map<String, Object>> list = null;
 
     /**
      * 数据缓存对象定义
-     *
-     * @param list
-     * @throws Exception
      */
     public DataCacheObject(List<Map<String, Object>> list) throws Exception {
         logger = LogManager.getLogger(this.getClass());
@@ -83,9 +80,6 @@ public class DataCacheObject {
 
     /**
      * 数据缓存对象加载
-     *
-     * @return Map<String , Map<String, Object>>
-     * @throws Exception
      */
     @SuppressWarnings("unchecked")
     public Map<String, Map<String, Object>> execute() {
@@ -125,10 +119,6 @@ public class DataCacheObject {
 
     /**
      * 指定数据缓存对象加载
-     *
-     * @param key 数据缓存对象名
-     * @return Map<String, Object>
-     * @throws Exception
      */
     @SuppressWarnings("unchecked")
     public Map<String, Object> execute(String key) {
