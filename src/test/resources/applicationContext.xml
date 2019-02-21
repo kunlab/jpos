@@ -9,4 +9,21 @@
     <context:component-scan base-package="com.kunlab.jpos" />
     <mvc:annotation-driven />
 
+
+    <!-- system config cache -->
+    <bean id="resourceDataCache" class="com.kunlab.jpos.cache.ResourceData">
+        <property name="name" value="cache"/>
+    </bean>
+    <bean id="dataCacheObjectSystem" class="com.kunlab.jpos.cache.DataCacheObject">
+        <constructor-arg>
+            <list>
+                <map>
+                    <entry key="name" value="cache"/>
+                    <entry key="object" value-ref="resourceDataCache"/>
+                    <entry key="method" value="execute"/>
+                </map>
+            </list>
+        </constructor-arg>
+    </bean>
+
 </beans>
