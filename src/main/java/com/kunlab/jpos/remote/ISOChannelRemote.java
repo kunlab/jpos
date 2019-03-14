@@ -10,7 +10,7 @@ import org.jpos.q2.iso.QMUX;
 import org.jpos.util.NameRegistrar;
 
 /**
- * tcp/ip  ISO8583报文
+ * tcp/ip  ISO8583 msg
  * @author likun
  */
 public class ISOChannelRemote extends BaseRemoteImpl<ISOMsg, ISOMsg> {
@@ -45,11 +45,12 @@ public class ISOChannelRemote extends BaseRemoteImpl<ISOMsg, ISOMsg> {
         try {
             logger.info("remote req(hex): {}", ISOUtil.hexString(req.pack()));
             resp = qmux.request(req, timeout);
+            logger.info("remote resp(hex): {}", resp != null ? ISOUtil.hexString(resp.pack()) : "");
         } catch (ISOException e) {
             logger.error(e);
             throw new RemoteException(ResultEnum.RS_96.getCode(), ResultEnum.RS_96.getDesc(), e);
         } finally {
-            logger.info("remote finish, {}ms", new Object[]{preResp(resp) - time});
+            logger.info("remote finish, {}ms", preResp(resp) - time);
         }
 
         return resp;

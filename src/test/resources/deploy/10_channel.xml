@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<client class="org.jpos.q2.iso.OneShotChannelAdaptor" logger="Q2" name="channel-adaptor">
+    <channel class="com.kunlab.jpos.iso.channel.HEXChannel" logger="Q2" realm="server_channel"
+             packager="org.jpos.iso.packager.GenericPackager"
+             header="6000000000603000320000">
+
+    </channel>
+    <max-connections>2</max-connections>
+    <max-connect-attempts>15</max-connect-attempts>
+</client>
