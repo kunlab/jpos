@@ -3,8 +3,14 @@
     <channel class="com.kunlab.jpos.iso.channel.HEXChannel" logger="Q2" realm="server_channel"
              packager="org.jpos.iso.packager.GenericPackager"
              header="6000000000603000320000">
-
+        <property name="host" value="${remote.host}"/>
+        <property name="port" value="${remote.port}" />
+        <property name="packager-config" value="${remote.package}" />
+        <property name="override-header" value="true" />
+        <property name="timeout" value="${remote.timeout}" />
     </channel>
+    <in>send</in>
+    <out>receive</out>
     <max-connections>2</max-connections>
     <max-connect-attempts>15</max-connect-attempts>
 </client>

@@ -54,7 +54,7 @@
 
     <isofield
             id="7"
-            length="10"
+            length="17"
             name="TRANSMISSION DATE AND TIME"
             pad="true"
             class="org.jpos.iso.IFB_NUMERIC"/>
@@ -382,7 +382,7 @@
     <isofield
             id="58"
             length="999"
-            name="RESERVED NATIONAL"
+            name="TRASMISSION TRACE NUMBER"
             class="org.jpos.iso.IFB_LLLCHAR"/>
 
     <isofield

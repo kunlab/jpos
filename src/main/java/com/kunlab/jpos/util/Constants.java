@@ -5,6 +5,7 @@ package com.kunlab.jpos.util;
  */
 public class Constants {
 
+
     public static final String INTERNAL_ZPK             = "internal.zpk";
 
     //MSG TYPE

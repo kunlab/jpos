@@ -10,6 +10,11 @@
         <property name="packager-config" value="${server.package}"/>
         <property name="expect-keep-alive" value="true"/>
         <property name="timeout" value="${server.timeout}"/>
+
+        <filter class="com.kunlab.jpos.iso.filter.ISOMacroFilter" direction="incoming">
+            <property name="date" value="7" />
+            <property name="id" value="58" />
+        </filter>
     </channel>
 
     <request-listener class="com.kunlab.jpos.iso.RequestListener" logger="Q2">

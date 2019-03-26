@@ -75,7 +75,6 @@ public class MsgTest {
         m.set(41, "99998888");
         m.set(42, "801544520504178");
         m.set(60, "00000001301");
-        m.set(120, Util.randomUUID());
 
         ISOMsg resp = sendAndReceive(channel, m);
         resp.dump(System.out, "");
