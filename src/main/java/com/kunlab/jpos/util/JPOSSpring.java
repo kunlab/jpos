@@ -16,10 +16,11 @@ import org.jpos.util.NameRegistrar;
  */
 public class JPOSSpring extends QBeanSupport {
     private static final String CFG_SERVER_SPRING = "spring";
+    private String cfg_spring;
 
     @Override
     public void initService() throws ConfigurationException {
-        String cfg_spring = cfg.get(CFG_SERVER_SPRING);
+        cfg_spring = cfg.get(CFG_SERVER_SPRING);
         log.info("loading spring application: " + cfg_spring);
         if(StringUtils.isBlank(cfg_spring))
             throw new ConfigurationException("spring cfg must be not null!");
@@ -27,7 +28,7 @@ public class JPOSSpring extends QBeanSupport {
 
     @Override
     public void startService(){
-        Spring spring = Spring.getInstance(cfg.get(CFG_SERVER_SPRING));
+        Spring spring = Spring.getInstance(cfg_spring);
         NameRegistrar.register(getName(), spring);
     }
 
