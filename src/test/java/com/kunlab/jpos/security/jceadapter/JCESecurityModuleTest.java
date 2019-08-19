@@ -16,11 +16,12 @@ public class JCESecurityModuleTest {
 
     JCESecurityModule jceSecurityModule;
 
-    private static final byte[] testKEK = ISOUtil.hex2byte("10101010101010101010101010101010");  //明文
+//    private static final byte[] testKEK = ISOUtil.hex2byte("10101010101010101010101010101010");  //明文
+    private static final byte[] testKEK = ISOUtil.hex2byte("B023A7C757FDB3BA028A3783EF587C91");  //明文
 //    private static final byte[] testKey = ISOUtil.hex2byte("A12B3C4DE25FADFA23FADFA1243FAFD2");  //明文
 //    private static final byte[] testKey = ISOUtil.hex2byte("3167EFE2C355299E5CD6C7D366B22CE0");  //深圳银联测试机构密钥明文
 //    private static final byte[] testKey = ISOUtil.hex2byte("BCC197D1B8E3B1ACFAD69B005BF83233");  //深圳银联生产机构密钥明文
-    private static final byte[] testKey = ISOUtil.hex2byte("A2452A5BFEB3DC40BF6173924F73F794");  //国通星驿测试机构密钥明文
+//    private static final byte[] testKey = ISOUtil.hex2byte("A2452A5BFEB3DC40BF6173924F73F794");  //国通星驿测试机构密钥明文
 //    private static final byte[] testMAK = ISOUtil.hex2byte("A12B3C4DE25FADFA");                  //明文
 
     @Before
@@ -34,7 +35,7 @@ public class JCESecurityModuleTest {
     //明文转本地主密钥加密的密文
     @Test
     public void importClearKeyImpl() throws Exception {
-        SecureDESKey keyUnderLmk = jceSecurityModule.importKeyImpl(SMAdapter.LENGTH_DES3_2KEY, SMAdapter.TYPE_ZMK, testKey, false);
+        SecureDESKey keyUnderLmk = jceSecurityModule.importKeyImpl(SMAdapter.LENGTH_DES3_2KEY, SMAdapter.TYPE_TMK, testKEK, false);
         System.out.println(ISOUtil.byte2hex(keyUnderLmk.getKeyBytes()).toUpperCase());
         System.out.println(ISOUtil.byte2hex(keyUnderLmk.getKeyCheckValue()).toUpperCase());
     }
@@ -55,7 +56,7 @@ public class JCESecurityModuleTest {
 //        byte[] clearKey = jceSecurityModule.exportClearKeyImpl(keyUnderLmk.getKeyLength(), keyUnderLmk.getKeyType(), ISOUtil.byte2hex(keyUnderLmk.getKeyBytes()), ISOUtil.byte2hex(keyUnderLmk.getKeyCheckValue()));
 //        System.out.println(ISOUtil.byte2hex(clearKey));
 
-        SecureDESKey keyUnderLmk = new SecureDESKey(SMAdapter.LENGTH_DES3_2KEY,SMAdapter.TYPE_TPK,ISOUtil.hex2byte("90DBF3311D2C49FDAB2AC5C84BDA1E9A"), ISOUtil.hex2byte("1C124DED"));
+        SecureDESKey keyUnderLmk = new SecureDESKey(SMAdapter.LENGTH_DES,SMAdapter.TYPE_TAK,ISOUtil.hex2byte("69DD59933510AE15"), ISOUtil.hex2byte("2BDD3214"));
         byte[] clearKey = jceSecurityModule.exportClearKeyImpl(keyUnderLmk.getKeyLength(), keyUnderLmk.getKeyType(), ISOUtil.byte2hex(keyUnderLmk.getKeyBytes()), ISOUtil.byte2hex(keyUnderLmk.getKeyCheckValue()));
         System.out.println(ISOUtil.byte2hex(clearKey));
     }

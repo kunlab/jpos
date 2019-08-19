@@ -4,20 +4,31 @@
     <attr name="port" type="java.lang.Integer">${server.port}</attr>
     <attr name="minSessions" type="java.lang.Integer">${server.minsessions}</attr>
     <attr name="maxSessions" type="java.lang.Integer">${server.maxsessions}</attr>
-    <channel class="com.kunlab.jpos.iso.channel.HEXChannel" logger="Q2" realm="server_channel"
+    <channel name="server_channel" class="com.kunlab.jpos.iso.channel.HEXChannel" logger="Q2" realm="server_channel"
              packager="org.jpos.iso.packager.GenericPackager"
              header="6000000000603000320000">
         <property name="packager-config" value="${server.package}"/>
-        <property name="expect-keep-alive" value="true"/>
-        <property name="timeout" value="${server.timeout}"/>
+        <property name="packager-logger" value="Q2"/>
+        <property name="packager-realm" value="server_packager"/>
+        <property name="keep-alive" value="true"/>
+        <!--<property name="expect-keep-alive" value="true"/>-->
 
         <filter class="com.kunlab.jpos.iso.filter.ISOMacroFilter" direction="incoming">
             <property name="date" value="7" />
-            <property name="id" value="58" />
+            <property name="trace" value="58" />
+        </filter>
+        <filter class="com.kunlab.jpos.iso.filter.ISOMacroFilter" direction="outgoing">
+            <property name="unset" value="7" />
         </filter>
     </channel>
 
-    <request-listener class="com.kunlab.jpos.iso.RequestListener" logger="Q2">
+    <property name="allow" value="127.0.0.1" />
+    <property name="allow" value="172.31.8.*" />
+    <!--<property name="deny" value="127.0.0.1" />-->
+    <!--<property name="deny" value="172.28.32.*" />-->
+
+    <request-listener class="com.kunlab.jpos.iso.RequestListener">
+        <property name="useThreadPool" value="false" />
         <property name="spring" value="jpos-spring" />
         <property name="service" value="isoService" />
     </request-listener>

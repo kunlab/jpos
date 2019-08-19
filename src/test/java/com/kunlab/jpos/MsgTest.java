@@ -215,10 +215,5 @@ public class MsgTest {
 //        saleReversal(resp);
     }
 
-    @Test
-    public void pubTest() throws Exception {
-
-    }
-
 
 }
