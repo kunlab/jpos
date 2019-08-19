@@ -31,6 +31,7 @@ public class ISOMacroFilter implements ISOFilter, Configurable {
         traceField = cfg.getInt("trace", 0);
         unsetFields     = ISOUtil.toIntArray (cfg.get ("unset", ""));
         validFields     = ISOUtil.toIntArray (cfg.get ("valid", ""));
+
         String seqName  = cfg.get ("sequencer", null);
         if(seqName != null) {
             //TODO
