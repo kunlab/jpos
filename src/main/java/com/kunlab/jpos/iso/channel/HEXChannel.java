@@ -1,7 +1,6 @@
 package com.kunlab.jpos.iso.channel;
 
 import org.jpos.iso.BaseChannel;
-import org.jpos.iso.ISOException;
 import org.jpos.iso.ISOPackager;
 import org.jpos.iso.ISOUtil;
 
@@ -63,7 +62,7 @@ public class HEXChannel extends BaseChannel {
         serverOut.write (len);
     }
 
-    protected int getMessageLength() throws IOException, ISOException {
+    protected int getMessageLength() throws IOException {
         byte[] b = new byte[2];
         serverIn.readFully(b,0,2);
         return ISOUtil.byte2int(b);

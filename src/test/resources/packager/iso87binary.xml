@@ -381,9 +381,9 @@
 
     <isofield
             id="58"
-            length="999"
+            length="32"
             name="TRASMISSION TRACE NUMBER"
-            class="org.jpos.iso.IFB_LLLCHAR"/>
+            class="org.jpos.iso.IFB_NUMERIC"/>
 
     <isofield
             id="59"
